@@ -26,27 +26,27 @@ namespace CPSIT\GeoLocationService\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-interface GeoCodableInterface
+interface GeoCodeableInterface
 {
-    public function getPlace();
+    public function getPlace(): string;
 
-    public function getZip();
+    public function getZip(): string;
 
-    public function getAddress();
+    public function getAddress(): string;
 
-    public function getLatitude();
+    public function getLatitude(): float;
 
-    public function getLongitude();
+    public function getLongitude(): float;
 
     /**
-     * @param $latitude
+     * @param float  $latitude
      * @return void
      */
-    public function setLatitude($latitude);
+    public function setLatitude(float $latitude): void;
 
     /**
-     * @param $longitude
-     * @return mixed
+     * @param float  $longitude
+     * @return void
      */
-    public function setLongitude($longitude);
+    public function setLongitude(float $longitude): void;
 }

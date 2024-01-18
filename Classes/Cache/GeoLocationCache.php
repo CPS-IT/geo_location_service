@@ -44,7 +44,7 @@ class GeoLocationCache
     /**
      * @var FrontendInterface Cache instance
      */
-    private $cache;
+    private FrontendInterface $cache;
 
     /**
      * Initialize GeoLocation cache.
@@ -60,18 +60,18 @@ class GeoLocationCache
      * @param string $cacheIdentifier
      * @return mixed|null
      */
-    public function get(string $cacheIdentifier)
+    public function get(string $cacheIdentifier): mixed
     {
         return $this->cache->get($cacheIdentifier);
     }
 
     /**
      * @param string $cacheIdentifier
-     * @param $data
+     * @param mixed $data
      * @param array $tags
      * @param int|null $lifetime
      */
-    public function set(string $cacheIdentifier, $data, array $tags = [], int $lifetime = null): void
+    public function set(string $cacheIdentifier, mixed $data, array $tags = [], int $lifetime = null): void
     {
         $this->cache->set($cacheIdentifier, $data, $tags, $lifetime);
     }
