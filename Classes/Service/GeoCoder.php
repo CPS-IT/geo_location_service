@@ -28,7 +28,7 @@ namespace CPSIT\GeoLocationService\Service;
  ***************************************************************/
 
 use CPSIT\GeoLocationService\Cache\GeoLocationCache;
-use CPSIT\GeoLocationService\Domain\Model\GeoCodeableInterface;
+use CPSIT\GeoLocationService\Domain\Model\GeoCodableInterface;
 use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Exception;
@@ -284,14 +284,14 @@ class GeoCoder
     /**
      * Update Geo Location
      * Sets latitude and longitude of an object. The object
-     * must implement the GeoCodeableInterface.
+     * must implement the GeoCodableInterface.
      * Will first read city and zip attributes then tries to
      * get geo location values and if succeeds update the latitude and
      * longitude values of the object.
      *
-     * @var GeoCodeableInterface $object
+     * @var GeoCodableInterface $object
      */
-    public function updateGeoLocation(GeoCodeableInterface $object): void
+    public function updateGeoLocation(GeoCodableInterface $object): void
     {
         $city = $object->getPlace();
         if (!empty($city)) {

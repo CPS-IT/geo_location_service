@@ -26,7 +26,7 @@ namespace CPSIT\GeoLocationService\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-interface GeoCodeableInterface
+interface GeoCodableInterface
 {
     public function getPlace(): string;
 
