@@ -235,7 +235,7 @@ class GeoCoder
         $rLonB = $rLon + atan2(sin($rBearing) * sin($rAngDist) * cos($rLat),
                 cos($rAngDist) - sin($rLat) * sin($rLatB));
 
-        return array('lat' => rad2deg($rLatB), 'lng' => rad2deg($rLonB));
+        return ['lat' => rad2deg($rLatB), 'lng' => rad2deg($rLonB)];
     }
 
     /**
