@@ -159,7 +159,7 @@ class GeoCoder
         $jsonResponse = $this->getUrl((string) $url);
         $response = json_decode($jsonResponse, true);
 
-        if ($response['status'] !== 'OK') {
+        if (!isset($response['status']) || $response['status'] !== 'OK') {
             return false;
         }
 
