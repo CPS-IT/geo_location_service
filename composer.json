@@ -34,9 +34,6 @@
     "saschaegerer/phpstan-typo3": "^1.1",
     "typo3/coding-standards": "^0.5.0"
   },
-  "allow-plugins": {
-	"typo3/class-alias-loader": true
-  },
   "autoload": {
     "psr-4": {
       "CPSIT\\GeoLocationService\\": "Classes/"
@@ -62,5 +59,10 @@
       "@sca:php"
     ],
     "sca:php": "phpstan analyse -c phpstan.neon"
+  },
+  "config": {
+    "allow-plugins": {
+	  "typo3/class-alias-loader": true
+	}
   }
 }
