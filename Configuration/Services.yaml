@@ -6,4 +6,3 @@ services:
 
   CPSIT\GeoLocationService\:
     resource: '../Classes/*'
-
