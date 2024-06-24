@@ -1,13 +1,12 @@
 {
   "name": "cpsit/geo-location-service",
   "description": "Get latitude and longitude for an address per google api call",
+  "license": "GPL-2.0-or-later",
   "type": "typo3-cms-extension",
   "keywords": [
     "TYPO3",
     "extension"
   ],
-  "homepage": "https://github.com/CPS-IT/geo_location_service",
-  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Erik Rauchstein",
@@ -23,10 +22,11 @@
       "role": "Developer"
     }
   ],
+  "homepage": "https://github.com/CPS-IT/geo_location_service",
   "require": {
-    "typo3/cms-core": "^10.4 | ^11.5 | ^12.4",
-    "php": "^8.1 | ^8.2",
-    "ext-json": "*"
+    "php": "^8.1",
+    "ext-json": "*",
+    "typo3/cms-core": "^10.4 || ^11.5 || ^12.4"
   },
   "require-dev": {
     "armin/editorconfig-cli": "^1.5",
@@ -39,10 +39,17 @@
       "CPSIT\\GeoLocationService\\": "Classes/"
     }
   },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true,
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
+    }
+  },
   "extra": {
     "typo3/cms": {
-      "extension-key": "geo-location-service",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "extension-key": "geo-location-service",
       "web-dir": ".Build/Web"
     }
   },
@@ -59,12 +66,5 @@
       "@sca:php"
     ],
     "sca:php": "phpstan analyse -c phpstan.neon"
-  },
-  "config": {
-    "allow-plugins": {
-	  "typo3/class-alias-loader": true,
-	  "typo3/cms-composer-installers": true,
-	  "ergebnis/composer-normalize": true
-	}
   }
 }
