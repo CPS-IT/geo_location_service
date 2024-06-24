@@ -30,7 +30,7 @@
   },
   "require-dev": {
     "armin/editorconfig-cli": "^1.5",
-    "ergebnis/composer-normalize-action": "^0.8.0",
+    "ergebnis/composer-normalize": "^2.43",
     "saschaegerer/phpstan-typo3": "^1.1",
     "typo3/coding-standards": "^0.5.0"
   },
@@ -63,7 +63,8 @@
   "config": {
     "allow-plugins": {
 	  "typo3/class-alias-loader": true,
-	  "typo3/cms-composer-installers": true
+	  "typo3/cms-composer-installers": true,
+	  "ergebnis/composer-normalize": true
 	}
   }
 }
