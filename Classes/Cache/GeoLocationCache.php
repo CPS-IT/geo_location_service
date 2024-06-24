@@ -1,7 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
 namespace CPSIT\GeoLocationService\Cache;
 
 /*
@@ -23,8 +21,10 @@ namespace CPSIT\GeoLocationService\Cache;
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-use Psr\Http\Message\UriInterface;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -41,34 +41,49 @@ class GeoLocationCache
     /** @var int Default cache lifetime */
     public const DEFAULT_LIFETIME = 86400;
 
+    /**
+     * @var FrontendInterface Cache instance
+     */
     private FrontendInterface $cache;
 
-    public function __construct(FrontendInterface $cache)
+    /**
+     * Initialize GeoLocation cache.
+     *
+     * @throws NoSuchCacheException
+     */
+    public function __construct()
     {
-        $this->cache = $cache;
+        $this->cache = GeneralUtility::makeInstance(CacheManager::class)->getCache(self::NAME);
     }
 
     /**
-     * @return mixed
+     * @param string $cacheIdentifier
+     * @return mixed|null
      */
-    public function get(string $cacheIdentifier)
+    public function get(string $cacheIdentifier): mixed
     {
         return $this->cache->get($cacheIdentifier);
     }
 
     /**
+     * @param string $cacheIdentifier
      * @param mixed $data
-     * @param list<string> $tags
+     * @param array $tags
+     * @param int|null $lifetime
      */
-    public function set(string $cacheIdentifier, $data, array $tags = [], int $lifetime = null): void
+    public function set(string $cacheIdentifier, mixed $data, array $tags = [], int $lifetime = null): void
     {
         $this->cache->set($cacheIdentifier, $data, $tags, $lifetime);
     }
 
-    public function calculateCacheIdentifier(UriInterface $serviceUrl): string
+    /**
+     * @param Uri $serviceUrl
+     * @return string
+     */
+    public function calculateCacheIdentifier(Uri $serviceUrl): string
     {
         $queryParams = GeneralUtility::explodeUrl2Array($serviceUrl->getQuery());
         array_multisort($queryParams);
-        return sha1((string)$serviceUrl->withQuery(http_build_query($queryParams)));
+        return sha1((string) $serviceUrl->withQuery(http_build_query($queryParams)));
     }
 }

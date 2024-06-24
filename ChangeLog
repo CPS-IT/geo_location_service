@@ -23,7 +23,7 @@
 2019-05-27         [RELEASE] Release of geo_location_service 0.2.0 (Dirk Wenzel)
 2019-05-27 2574515 [BUGFIX] typo corrected (Dirk Wenzel)
 2019-05-27 9ab07c2 [TASK] add ChangeLog (Dirk Wenzel)
-2019-05-27 2d0fef8 [TASK] GeoCodingInterface renamed to GeoCodeableInterface (Dirk Wenzel)
+2019-05-27 2d0fef8 [TASK] GeoCodingInterface renamed to GeoCodableInterface (Dirk Wenzel)
 
 2019-05-27         [RELEASE] Release of geo_location_service 0.1.0 (Dirk Wenzel)
 2019-05-27 a51edfe [TASK] obsolete parameter removed rom serviceUrl (Dirk Wenzel)

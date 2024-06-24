@@ -1,70 +1,67 @@
 {
-	"name": "cpsit/geo-location-service",
-	"description": "Get latitude and longitude for an address per google api call",
-	"license": "GPL-2.0-or-later",
-	"type": "typo3-cms-extension",
-	"keywords": [
-		"TYPO3",
-		"extension"
-	],
-	"authors": [
-		{
-			"name": "Erik Rauchstein",
-			"role": "Developer"
-		},
-		{
-			"name": "Dirk Wenzel",
-			"role": "Developer"
-		},
-		{
-			"name": "Elias Häußler",
-			"email": "e.haeussler@familie-redlich.de",
-			"role": "Developer"
-		}
-	],
-	"homepage": "https://github.com/CPS-IT/geo_location_service",
-	"require": {
-		"php": "^7.4 || 8.0.*",
-		"ext-json": "*",
-		"psr/http-message": "^1.0",
-		"typo3/cms-core": "^10.4 || ^11.5"
-	},
-	"require-dev": {
-		"armin/editorconfig-cli": "^1.5",
-		"ergebnis/composer-normalize": "^2.24",
-		"saschaegerer/phpstan-typo3": "^1.1",
-		"typo3/coding-standards": "^0.5.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"CPSIT\\GeoLocationService\\": "Classes/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"ergebnis/composer-normalize": true,
-			"typo3/class-alias-loader": true,
-			"typo3/cms-composer-installers": true
-		},
-		"sort-packages": true
-	},
-	"extra": {
-		"typo3/cms": {
-			"extension-key": "geo_location_service"
-		}
-	},
-	"scripts": {
-		"lint": [
-			"@lint:composer",
-			"@lint:editorconfig",
-			"@lint:php"
-		],
-		"lint:composer": "@composer normalize --no-check-lock --no-update-lock",
-		"lint:editorconfig": "ec --fix",
-		"lint:php": "php-cs-fixer fix",
-		"sca": [
-			"@sca:php"
-		],
-		"sca:php": "phpstan analyse -c phpstan.neon"
-	}
+  "name": "cpsit/geo-location-service",
+  "description": "Get latitude and longitude for an address per google api call",
+  "type": "typo3-cms-extension",
+  "keywords": [
+    "TYPO3",
+    "extension"
+  ],
+  "homepage": "https://github.com/CPS-IT/geo_location_service",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Erik Rauchstein",
+      "role": "Developer"
+    },
+    {
+      "name": "Dirk Wenzel",
+      "role": "Developer"
+    },
+    {
+      "name": "Elias Häußler",
+      "email": "e.haeussler@familie-redlich.de",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "typo3/cms-core": "^10.4 | ^11.5 | ^12.4",
+    "php": "^8.1 | ^8.2",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "armin/editorconfig-cli": "^1.5",
+    "ergebnis/composer-normalize": "^2.24",
+    "saschaegerer/phpstan-typo3": "^1.1",
+    "typo3/coding-standards": "^0.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "CPSIT\\GeoLocationService\\": "Classes/"
+    }
+  },
+  "replace": {
+    "geo_location_service": "self.version",
+    "typo3-ter/geo-location-service": "self.version"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "geo-location-service",
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web"
+    }
+  },
+  "scripts": {
+    "lint": [
+      "@lint:composer",
+      "@lint:editorconfig",
+      "@lint:php"
+    ],
+    "lint:composer": "@composer normalize --no-check-lock --no-update-lock",
+    "lint:editorconfig": "ec --fix",
+    "lint:php": "php-cs-fixer fix",
+    "sca": [
+      "@sca:php"
+    ],
+    "sca:php": "phpstan analyse -c phpstan.neon"
+  }
 }
