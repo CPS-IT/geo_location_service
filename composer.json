@@ -24,16 +24,15 @@
 	],
 	"homepage": "https://github.com/CPS-IT/geo_location_service",
 	"require": {
-		"php": "^7.4 || 8.0.*",
+		"php": "^8.2",
 		"ext-json": "*",
-		"psr/http-message": "^1.0",
-		"typo3/cms-core": "^10.4 || ^11.5"
+		"typo3/cms-core": "^11.5 || ^12.4"
 	},
 	"require-dev": {
-		"armin/editorconfig-cli": "^1.5",
-		"ergebnis/composer-normalize": "^2.24",
-		"saschaegerer/phpstan-typo3": "^1.1",
-		"typo3/coding-standards": "^0.5.0"
+		"armin/editorconfig-cli": "^2.0",
+		"ergebnis/composer-normalize": "^2.43",
+		"saschaegerer/phpstan-typo3": "^1.10",
+		"typo3/coding-standards": "^0.8"
 	},
 	"autoload": {
 		"psr-4": {
@@ -45,12 +44,13 @@
 			"ergebnis/composer-normalize": true,
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
-		},
-		"sort-packages": true
+		}
 	},
 	"extra": {
 		"typo3/cms": {
-			"extension-key": "geo_location_service"
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"extension-key": "geo-location-service",
+			"web-dir": ".Build/Web"
 		}
 	},
 	"scripts": {

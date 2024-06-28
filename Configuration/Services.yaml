@@ -2,22 +2,7 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
-    public: false
+    public: true
 
   CPSIT\GeoLocationService\:
     resource: '../Classes/*'
-    exclude:
-      - '../Classes/Domain/Model/*'
-
-  CPSIT\GeoLocationService\Service\GeoCoder:
-    public: true
-
-  CPSIT\GeoLocationService\Cache\GeoLocationCache:
-    arguments:
-      $cache: '@cache.geo_location_service.location'
-
-  cache.geo_location_service.location:
-    class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
-    factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
-    arguments:
-      - !php/const CPSIT\GeoLocationService\Cache\GeoLocationCache::NAME
