@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace CPSIT\GeoLocationService\Cache;
 
 /*
@@ -84,6 +86,6 @@ class GeoLocationCache
     {
         $queryParams = GeneralUtility::explodeUrl2Array($serviceUrl->getQuery());
         array_multisort($queryParams);
-        return sha1((string) $serviceUrl->withQuery(http_build_query($queryParams)));
+        return sha1((string)$serviceUrl->withQuery(http_build_query($queryParams)));
     }
 }

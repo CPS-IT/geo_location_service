@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace CPSIT\GeoLocationService\Domain\Model;
@@ -42,13 +43,11 @@ interface GeoCodableInterface
 
     /**
      * @param float  $latitude
-     * @return void
      */
     public function setLatitude(float $latitude): void;
 
     /**
      * @param float  $longitude
-     * @return void
      */
     public function setLongitude(float $longitude): void;
 }

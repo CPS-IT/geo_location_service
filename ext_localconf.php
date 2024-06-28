@@ -1,8 +1,9 @@
 <?php
+
 defined('TYPO3') or die();
 
 // Register geo location cache
-(function() {
+(function () {
     $cacheConfigurations = &$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'];
 
     if (!isset($cacheConfigurations[\CPSIT\GeoLocationService\Cache\GeoLocationCache::NAME])) {

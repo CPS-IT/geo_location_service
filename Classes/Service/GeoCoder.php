@@ -1,4 +1,5 @@
 <?php
+
 namespace CPSIT\GeoLocationService\Service;
 
 /***************************************************************
@@ -156,7 +157,7 @@ class GeoCoder
             // Intended fallthrough if cache is not available.
         }
 
-        $jsonResponse = $this->getUrl((string) $url);
+        $jsonResponse = $this->getUrl((string)$url);
         $response = json_decode($jsonResponse, true);
 
         if (!isset($response['status']) || $response['status'] !== 'OK') {
@@ -216,7 +217,7 @@ class GeoCoder
      * @param float $lat Latitude
      * @param float $lng Longitude
      * @param float $bearing
-     * @param integer $distance Distance
+     * @param int $distance Distance
      * @param string $units Units: default km. Any other value will result in computing with mile based constants.
      * @return array An array with lat and lng values
      * @codeCoverageIgnore
@@ -232,8 +233,10 @@ class GeoCoder
         $rLatB = asin(sin($rLat) * cos($rAngDist) +
             cos($rLat) * sin($rAngDist) * cos($rBearing));
 
-        $rLonB = $rLon + atan2(sin($rBearing) * sin($rAngDist) * cos($rLat),
-                cos($rAngDist) - sin($rLat) * sin($rLatB));
+        $rLonB = $rLon + atan2(
+            sin($rBearing) * sin($rAngDist) * cos($rLat),
+            cos($rAngDist) - sin($rLat) * sin($rLatB)
+        );
 
         return ['lat' => rad2deg($rLatB), 'lng' => rad2deg($rLonB)];
     }
@@ -254,7 +257,7 @@ class GeoCoder
             'N' => $this->destination($lat, $lng, 0, $distance, $units),
             'E' => $this->destination($lat, $lng, 90, $distance, $units),
             'S' => $this->destination($lat, $lng, 180, $distance, $units),
-            'W' => $this->destination($lat, $lng, 270, $distance, $units)
+            'W' => $this->destination($lat, $lng, 270, $distance, $units),
         ];
     }
 
