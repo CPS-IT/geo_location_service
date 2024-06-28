@@ -44,7 +44,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class GeoCoder
 {
     /**
-     * @var array Valid URL parameters for Google Geocoding API
+     * @var array<string> Valid URL parameters for Google Geocoding API
      * @see https://developers.google.com/maps/documentation/geocoding/intro#GeocodingRequests
      */
     public const VALID_SERVICE_URL_PARAMETERS = [
@@ -73,7 +73,7 @@ class GeoCoder
     /**
      * Configuration set by extension configuration.
      *
-     * @var array
+     * @var mixed
      */
     protected mixed $extConf;
 
@@ -95,9 +95,9 @@ class GeoCoder
     /**
      * Set the base url of the geo coding service
      *
-     * @param $serviceUrl
+     * @param string $serviceUrl
      */
-    public function setServiceUrl($serviceUrl): void
+    public function setServiceUrl(string $serviceUrl): void
     {
         $this->serviceUrl = $serviceUrl;
     }
@@ -203,7 +203,7 @@ class GeoCoder
      * Wrapper for GeneralUtility::getUrl to make it testable.
      *
      * @param string $url File/Url to fetch
-     * @return mixed Response
+     * @return string Response
      * @codeCoverageIgnore
      */
     public function getUrl(string $url): string
