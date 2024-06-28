@@ -26,8 +26,8 @@ indent_size = 4
 max_line_length = 80
 
 # Markdown-Files
-[*.md]
-max_line_length = 80
+# [*.md]
+# /max_line_length = 80
 
 # YAML-Files
 [*.{yaml,yml}]
