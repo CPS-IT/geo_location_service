@@ -26,7 +26,7 @@
 	"require": {
 		"php": "^8.2",
 		"ext-json": "*",
-		"typo3/cms-core": "^11.5 || ^12.4"
+		"typo3/cms-core": "^13.4"
 	},
 	"require-dev": {
 		"armin/editorconfig-cli": "^2.0",
@@ -47,6 +47,9 @@
 		}
 	},
 	"extra": {
+		"branch-alias": {
+			"dev-upgrade/v13": "13.0.x-dev"
+		},
 		"typo3/cms": {
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"extension-key": "geo-location-service",

@@ -18,10 +18,10 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'erik.rauchstein@cps-it.de',
     'state' => 'beta',
     'author_company' => '',
-    'version' => '0.3.0',
+    'version' => '13.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-12.4.99',
+            'typo3' => '13.4.0-13.99.99',
         ],
         'suggests' => [
             'pagenotfoundhandling' => '',
