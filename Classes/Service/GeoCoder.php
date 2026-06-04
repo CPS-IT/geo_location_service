@@ -65,27 +65,18 @@ class GeoCoder
 
     /**
      * Api key for geo code api
-     *
-     * @var string
      */
     protected string $apiKey;
 
     /**
      * Configuration set by extension configuration.
-     *
-     * @var mixed
      */
     protected mixed $extConf;
 
-    /**
-     * @var GeoLocationCache
-     */
     protected GeoLocationCache $cache;
 
     /**
      * Returns the base url of the geo coding service
-     *
-     * @return string
      */
     public function getServiceUrl(): string
     {
@@ -94,25 +85,17 @@ class GeoCoder
 
     /**
      * Set the base url of the geo coding service
-     *
-     * @param string $serviceUrl
      */
     public function setServiceUrl(string $serviceUrl): void
     {
         $this->serviceUrl = $serviceUrl;
     }
 
-    /**
-     * @return string
-     */
     public function getApiKey(): string
     {
         return $this->apiKey;
     }
 
-    /**
-     * @param string $apiKey
-     */
     public function setApiKey(string $apiKey): void
     {
         $this->apiKey = $apiKey;
@@ -124,7 +107,7 @@ class GeoCoder
 
         try {
             $this->extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('geo_location_service');
-        } catch (Exception $e) {
+        } catch (Exception) {
             $this->extConf = [];
         }
         $this->setApiKey($this->extConf['googleApiKey']);
@@ -134,7 +117,6 @@ class GeoCoder
      * Get geo location encoded from Google Maps geocode service.
      *
      * @param string $address An address to encode.
-     * @param array $additionalParameters
      * @return array|false Array containing geo location information
      */
     public function getLocation(string $address, array $additionalParameters = []): false|array
@@ -153,10 +135,11 @@ class GeoCoder
             if ($result !== false) {
                 return $result;
             }
-        } catch (NoSuchCacheException $e) {
+        } catch (NoSuchCacheException) {
             // Intended fallthrough if cache is not available.
         }
 
+        // @extensionScannerIgnoreLine
         $jsonResponse = $this->getUrl((string)$url);
         $response = json_decode($jsonResponse, true);
 
@@ -171,25 +154,19 @@ class GeoCoder
         return $result;
     }
 
-    /**
-     * @param array $parameters
-     * @return Uri
-     */
     public function buildServiceUrlWithParameters(array $parameters = []): Uri
     {
         $uri = new Uri($this->serviceUrl);
 
-        if (empty($parameters)) {
+        if ($parameters === []) {
             return $uri;
         }
 
         // Remove invalid URI parameters
-        $parameters = array_filter($parameters, function ($parameterName) {
-            return in_array($parameterName, self::VALID_SERVICE_URL_PARAMETERS);
-        }, ARRAY_FILTER_USE_KEY);
+        $parameters = array_filter($parameters, fn($parameterName): bool => in_array($parameterName, self::VALID_SERVICE_URL_PARAMETERS), ARRAY_FILTER_USE_KEY);
 
         // Respect predefined parameters in service URI
-        if (!empty($uri->getQuery())) {
+        if (!in_array($uri->getQuery(), ['', '0'], true)) {
             $parameters += GeneralUtility::explodeUrl2Array($uri->getQuery());
         }
 
@@ -216,7 +193,6 @@ class GeoCoder
      *
      * @param float $lat Latitude
      * @param float $lng Longitude
-     * @param float $bearing
      * @param int $distance Distance
      * @param string $units Units: default km. Any other value will result in computing with mile based constants.
      * @return array An array with lat and lng values
@@ -224,7 +200,7 @@ class GeoCoder
      */
     public function destination(float $lat, float $lng, float $bearing, int $distance, string $units = 'km'): array
     {
-        $radius = strcasecmp($units, 'km') ? 3963.19 : 6378.137;
+        $radius = strcasecmp($units, 'km') !== 0 ? 3963.19 : 6378.137;
         $rLat = deg2rad($lat);
         $rLon = deg2rad($lng);
         $rBearing = deg2rad($bearing);
@@ -269,19 +245,18 @@ class GeoCoder
      * @param float $latB Latitude of location B
      * @param float $lonB Longitude of location B
      * @param string $units Units: default km. Any other value will result in computing with mile based constants.
-     * @return float
      * @codeCoverageIgnore
      */
     public function distance(float $latA, float $lonA, float $latB, float $lonB, string $units = 'km'): float
     {
-        $radius = strcasecmp($units, 'km') ? 3963.19 : 6378.137;
+        $radius = strcasecmp($units, 'km') !== 0 ? 3963.19 : 6378.137;
         $rLatA = deg2rad($latA);
         $rLatB = deg2rad($latB);
         $rHalfDeltaLat = deg2rad(($latB - $latA) / 2);
         $rHalfDeltaLon = deg2rad(($lonB - $lonA) / 2);
 
-        return 2 * $radius * asin(sqrt(pow(sin($rHalfDeltaLat), 2) +
-            cos($rLatA) * cos($rLatB) * pow(sin($rHalfDeltaLon), 2)));
+        return 2 * $radius * asin(sqrt(sin($rHalfDeltaLat) ** 2 +
+            cos($rLatA) * cos($rLatB) * sin($rHalfDeltaLon) ** 2));
     }
 
     /**
@@ -297,12 +272,12 @@ class GeoCoder
     public function updateGeoLocation(GeoCodableInterface $object): void
     {
         $city = $object->getPlace();
-        if (!empty($city)) {
+        if ($city !== '' && $city !== '0') {
             $address = '';
             $zip = $object->getZip();
             $street = $object->getAddress();
-            $address .= (!empty($zip)) ? $zip . ' ' : null;
-            $address .= (!empty($street)) ? $street . ' ' : null;
+            $address .= ($zip === '' || $zip === '0') ? null : $zip . ' ';
+            $address .= ($street === '' || $street === '0') ? null : $street . ' ';
             $address .= $city;
             $geoLocation = $this->getLocation($address);
             if ($geoLocation) {
