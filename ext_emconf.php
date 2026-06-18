@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /***************************************************************
  * Extension Manager/Repository config file for ext "geo_location_service".
  *
@@ -9,7 +11,6 @@
  * Only the data in the array - everything else is removed by next
  * writing. "version" and "dependencies" must not be touched!
  ***************************************************************/
-
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Geo Location Service',
     'description' => 'Get latitude and longitude for an address per google api call',

@@ -41,13 +41,7 @@ interface GeoCodableInterface
 
     public function getLongitude(): float;
 
-    /**
-     * @param float  $latitude
-     */
     public function setLatitude(float $latitude): void;
 
-    /**
-     * @param float  $longitude
-     */
     public function setLongitude(float $longitude): void;
 }
