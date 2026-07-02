@@ -52,7 +52,7 @@
 		},
 		"typo3/cms": {
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
-			"extension-key": "geo-location-service",
+			"extension-key": "geo_location_service",
 			"web-dir": ".Build/Web"
 		}
 	},
